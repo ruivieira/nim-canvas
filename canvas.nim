@@ -17,8 +17,14 @@ proc width*(c: Canvas): int =
 proc height*(c: Canvas): int =
   {.emit: "`result` = `c`.height;".}
 
-proc `fillStyle=`*(ctx: CanvasContext2d, value: string) =
-  {.emit: "`ctx`.fillStyle = `value`;".}
+proc fillStyle*(ctx: CanvasContext2d, value: string) =
+  {.emit: "`ctx`.fillStyle = '`value`';".}
+
+proc fillStyle*(ctx: CanvasContext2d, r, g, b: int) =
+  {.emit: "`ctx`.fillStyle = 'rgb(`r`,`g`,`b`)';".}
+
+proc fillStyle*(ctx: CanvasContext2d, r, g, b: float) =
+  {.emit: "`ctx`.fillStyle = 'rgb(`r`,`g`,`b`)';".}
 
 proc requestAnimationFrame*(op: proc) =
   {.emit: "`ran` = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame; `ran`(`op`);".}
@@ -28,5 +34,6 @@ proc beginPath*(c: CanvasContext2d) {.importcpp.}
 proc stroke*(c: CanvasContext2d) {.importcpp.}
 proc strokeText*(c: CanvasContext2d, txt: cstring, x, y: float) {.importcpp.}
 proc clearRect*(c: CanvasContext2d, x, y, w, h: float) {.importcpp.}
-proc fillRect*(ctx: CanvasContext2d, x: int, y: int, w: int, h:int) {.importcpp.}
+proc fillRect*(ctx: CanvasContext2d, x, y, w, h: float) {.importcpp.}
+proc fillRect*(ctx: CanvasContext2d, x, y, w, h: int) {.importcpp.}
 proc closePath*(ctx: CanvasContext2d) {.importcpp.}
