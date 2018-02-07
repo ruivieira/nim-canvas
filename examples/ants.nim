@@ -25,7 +25,7 @@ proc drawAnt(ctx: CanvasContext2d, ant : Ant) =
     ctx.fillRect(ant.x * CELLSIZE, ant.y * CELLSIZE, CELLSIZE, CELLSIZE)
     ctx.closePath()
 
-proc moveForward(ant: Ant) : Ant =
+proc moveForward(ant: Ant) : Ant {. noSideEffect .} =
     result =
       case ant.direction
         of Direction.left:
@@ -54,7 +54,7 @@ for col in 0..<COLUMNS:
     for row in 0..<ROWS:
         states[col][row] = false
 
-proc turnRight(ant : Ant) : Ant  =
+proc turnRight(ant : Ant) : Ant {. noSideEffect .} =
     let direction =
       if ant.direction > Direction.left:
         Direction(ord(ant.direction) - 1)
@@ -63,7 +63,7 @@ proc turnRight(ant : Ant) : Ant  =
     result = Ant(x: ant.x, y: ant.y, direction: direction)
 
 
-proc turnLeft(ant : Ant) : Ant =
+proc turnLeft(ant : Ant) : Ant {. noSideEffect .} =
     let direction =
       if ant.direction < Direction.top:
         Direction(ord(ant.direction) + 1)

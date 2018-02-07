@@ -26,6 +26,15 @@ proc fillStyle*(ctx: CanvasContext2d, r, g, b: int) =
 proc fillStyle*(ctx: CanvasContext2d, r, g, b: float) =
   {.emit: "`ctx`.fillStyle = 'rgb(`r`,`g`,`b`)';".}
 
+proc strokeStyle*(ctx: CanvasContext2d, value: string) =
+  {.emit: "`ctx`.strokeStyle = '`value`';".}
+
+proc strokeStyle*(ctx: CanvasContext2d, r, g, b: int) =
+  {.emit: "`ctx`.strokeStyle = 'rgb(`r`,`g`,`b`)';".}
+
+proc strokeStyle*(ctx: CanvasContext2d, r, g, b: float) =
+  {.emit: "`ctx`.strokeStyle = 'rgb(`r`,`g`,`b`)';".}
+  
 proc requestAnimationFrame*(op: proc) =
   {.emit: "`ran` = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame; `ran`(`op`);".}
 
